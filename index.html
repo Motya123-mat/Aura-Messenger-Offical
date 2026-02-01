@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Messenger - Полнофункциональная соц сеть</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo" id="logoLink">
+                <i class="fas fa-gem"></i>
+                <span id="logoText">Aura Messenger</span>
+            </a>
+            <nav class="nav">
+                <button id="feedBtn" class="nav-btn active">
+                    <i class="fas fa-home"></i> Лента
+                </button>
+                <button id="profileBtn" class="nav-btn">
+                    <i class="fas fa-user"></i> Профиль
+                </button>
+                <button id="messagesBtn" class="nav-btn">
+                    <i class="fas fa-comments"></i> Сообщения
+                </button>
+                <button id="clansBtn" class="nav-btn">
+                    <i class="fas fa-users"></i> Кланы
+                </button>
+                <button id="adminBtn" class="nav-btn" style="display:none;">
+                    <i class="fas fa-shield-alt"></i> Админ
+                </button>
+            </nav>
+            <div class="user-info" id="userInfo" style="display:none;">
+                <span id="userNameDisplay" style="font-weight:600;color:var(--dark);margin-right:15px;"></span>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Выйти
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login/Register Modal -->
+    <div class="modal" id="authModal" style="display:flex;">
+        <div class="modal-content">
+            <span class="close" id="closeAuthModal">&times;</span>
+            <div class="tabs">
+                <button class="tab-btn active" id="loginTabBtn">Вход</button>
+                <button class="tab-btn" id="registerTabBtn">Регистрация</button>
+            </div>
+            <div id="loginTab" class="tab-content active">
+                <h2>Вход в систему</h2>
+                <input type="text" id="loginUsername" placeholder="Юзернейм" class="input-field" autocomplete="username">
+                <input type="password" id="loginPassword" placeholder="Пароль" class="input-field" autocomplete="current-password">
+                <button id="loginButton" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+            </div>
+            <div id="registerTab" class="tab-content">
+                <h2>Регистрация</h2>
+                <input type="text" id="regName" placeholder="Имя (минимум 2 символа)" class="input-field">
+                <input type="text" id="regUsername" placeholder="Юзернейм (минимум 3 символа, уникальный)" class="input-field">
+                <div id="usernameStatus"></div>
+                <input type="email" id="regEmail" placeholder="Email (для восстановления)" class="input-field">
+                <input type="password" id="regPassword" placeholder="Пароль (минимум 8 символов)" class="input-field" autocomplete="new-password">
+                <input type="password" id="regConfirmPassword" placeholder="Подтвердите пароль" class="input-field" autocomplete="new-password">
+                <button id="registerButton" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Зарегистрироваться
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container" style="display:none;">
+        <!-- Feed Section -->
+        <section id="feedSection" class="section active">
+            <div class="create-post">
+                <h3>Создать пост</h3>
+                <textarea id="postContent" placeholder="Что у вас нового?" class="post-textarea" disabled></textarea>
+                <button id="createPostButton" class="btn btn-success" disabled>
+                    <i class="fas fa-paper-plane"></i> Опубликовать
+                </button>
+                <p id="postCooldown" class="cooldown-text"></p>
+            </div>
+            <div id="postsContainer" class="posts-container">
+                <p class="loading-text">Загрузка...</p>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profileSection" class="section">
+            <div class="profile-header">
+                <div class="avatar-upload" id="avatarUpload">
+                    <img id="profileAvatar" src="https://via.placeholder.com/150" alt="Аватар" class="avatar">
+                    <input type="file" id="avatarInput" accept="image/*" style="display:none;" disabled>
+                </div>
+                <div class="profile-info">
+                    <h1 id="profileName">Имя пользователя</h1>
+                    <p id="profileUsername" class="username">@username</p>
+                    <div class="profile-stats">
+                        <span><i class="fas fa-gem"></i> <span id="profilePosts">0</span> постов</span>
+                        <span><i class="fas fa-users"></i> <span id="profileClan">-</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-edit">
+                <h3>Редактировать профиль</h3>
+                <input type="text" id="editName" placeholder="Имя (минимум 2 символа)" class="input-field" disabled>
+                <input type="text" id="editUsername" placeholder="Юзернейм (минимум 3 символа)" class="input-field" disabled>
+                <div id="editUsernameStatus"></div>
+                <input type="email" id="editEmail" placeholder="Email" class="input-field" disabled>
+                <button id="saveProfileButton" class="btn btn-primary" disabled>
+                    <i class="fas fa-save"></i> Сохранить изменения
+                </button>
+                <button id="changePasswordButton" class="btn btn-warning" disabled>
+                    <i class="fas fa-key"></i> Сменить пароль
+                </button>
+            </div>
+            <div class="user-posts" id="userPosts">
+                <h3>Мои посты</h3>
+                <p class="loading-text">Загрузка...</p>
+            </div>
+        </section>
+
+        <!-- Messages Section -->
+        <section id="messagesSection" class="section">
+            <h2>Личные сообщения</h2>
+            <div class="coming-soon">
+                <p>Функция сообщений в разработке</p>
+            </div>
+        </section>
+
+        <!-- Clans Section -->
+        <section id="clansSection" class="section">
+            <h2>Кланы</h2>
+            <div class="clan-actions">
+                <button id="createClanBtn" class="btn btn-primary" disabled>
+                    <i class="fas fa-plus"></i> Создать клан
+                </button>
+                <button id="joinClanBtn" class="btn btn-secondary" disabled>
+                    <i class="fas fa-user-plus"></i> Вступить в клан
+                </button>
+            </div>
+            <div id="clansContainer" class="clans-container">
+                <p class="loading-text">Загрузка...</p>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="adminSection" class="section">
+            <h2>Админ панель</h2>
+            <div class="admin-tabs">
+                <button id="usersTabBtn" class="admin-tab-btn active">Пользователи</button>
+                <button id="postsTabBtn" class="admin-tab-btn">Посты</button>
+                <button id="warningsTabBtn" class="admin-tab-btn">Предупреждения</button>
+                <button id="securityTabBtn" class="admin-tab-btn">Безопасность</button>
+            </div>
+            <div id="adminContent">
+                <p class="loading-text">Загрузка...</p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Clan Modal -->
+    <div class="modal" id="clanModal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="closeClanModal">&times;</span>
+            <h2>Создать клан</h2>
+            <input type="text" id="clanName" placeholder="Название клана (минимум 3 символа)" class="input-field">
+            <input type="text" id="clanTag" placeholder="Тег клана (например: @clan)" class="input-field">
+            <input type="text" id="clanDescription" placeholder="Описание клана (необязательно)" class="input-field">
+            <button id="createClanButtonModal" class="btn btn-primary">
+                <i class="fas fa-users"></i> Создать клан
+            </button>
+        </div>
+    </div>
+
+    <!-- Join Clan Modal -->
+    <div class="modal" id="joinClanModal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="closeJoinClanModal">&times;</span>
+            <h2>Вступить в клан</h2>
+            <select id="clanList" class="input-field">
+                <option value="">Выберите клан</option>
+            </select>
+            <button id="joinClanButtonModal" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Вступить
+            </button>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="closeChangePasswordModal">&times;</span>
+            <h2>Сменить пароль</h2>
+            <input type="password" id="oldPassword" placeholder="Старый пароль" class="input-field">
+            <input type="password" id="newPassword" placeholder="Новый пароль (минимум 8 символов)" class="input-field">
+            <input type="password" id="confirmNewPassword" placeholder="Подтвердите новый пароль" class="input-field">
+            <button id="confirmChangePasswordButton" class="btn btn-warning">
+                <i class="fas fa-key"></i> Изменить пароль
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

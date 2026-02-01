@@ -1,0 +1,752 @@
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #8b5cf6;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --dark: #1f2937;
+    --light: #f9fafb;
+    --gray: #6b7280;
+    --gray-light: #9ca3af;
+    --border: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    min-height: 100vh;
+    color: var(--dark);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background: white;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary);
+    gap: 10px;
+}
+
+.logo i {
+    font-size: 28px;
+    color: var(--secondary);
+}
+
+.nav {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: var(--gray);
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+.nav-btn:hover {
+    background: var(--light);
+    color: var(--dark);
+}
+
+.nav-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout-btn {
+    padding: 8px 16px;
+    background: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--gray);
+}
+
+.close:hover {
+    color: var(--dark);
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: none;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+/* Input fields */
+.input-field {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 16px;
+    transition: border 0.3s;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Buttons */
+.btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success), #0da271);
+    color: white;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, var(--warning), #d97706);
+    color: white;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger), #dc2626);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--gray), var(--gray-light));
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Sections */
+.section {
+    display: none;
+    padding: 30px 0;
+}
+
+.section.active {
+    display: block;
+}
+
+.section h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+/* Feed */
+.create-post {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-md);
+}
+
+.create-post h3 {
+    margin-bottom: 18px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+.post-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 16px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    resize: vertical;
+}
+
+.post-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.cooldown-text {
+    text-align: center;
+    color: var(--gray);
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Posts */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.post-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 3px solid var(--primary);
+}
+
+.post-info {
+    flex: 1;
+}
+
+.post-username {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.post-verified {
+    color: var(--success);
+    font-size: 16px;
+}
+
+.post-official {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.post-youtuber {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.post-owner-badge {
+    background: linear-gradient(135deg, #f43f5e, #ec4899);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.post-time {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.post-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--dark);
+}
+
+/* Profile */
+.profile-header {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-md);
+}
+
+.avatar-upload {
+    position: relative;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--primary);
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.username {
+    color: var(--primary);
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 30px;
+    font-size: 16px;
+    color: var(--gray);
+}
+
+.profile-stats i {
+    margin-right: 8px;
+    color: var(--primary);
+}
+
+.profile-edit {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-md);
+}
+
+.profile-edit h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+.user-posts {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+}
+
+.user-posts h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+/* Clans */
+.clan-actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.clans-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.clan-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+}
+
+.clan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.clan-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-right: 10px;
+}
+
+.clan-tag {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.clan-description {
+    color: var(--gray);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.clan-members {
+    display: flex;
+    align-items: center;
+    color: var(--gray);
+    font-size: 14px;
+}
+
+/* Admin */
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.admin-tab-btn {
+    padding: 12px 24px;
+    border: none;
+    background: white;
+    color: var(--gray);
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+
+.admin-tab-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.admin-users-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-user-card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-user-info {
+    flex: 1;
+}
+
+.admin-user-name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.admin-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    transition: opacity 0.3s;
+}
+
+.admin-btn-verify {
+    background: var(--success);
+}
+
+.admin-btn-official {
+    background: #f59e0b;
+}
+
+.admin-btn-youtuber {
+    background: #ef4444;
+}
+
+.admin-btn-ban {
+    background: var(--danger);
+}
+
+.admin-btn-mute {
+    background: var(--gray);
+}
+
+.admin-btn-warning {
+    background: var(--warning);
+}
+
+.admin-btn:hover {
+    opacity: 0.9;
+}
+
+/* Messages */
+.coming-soon {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.coming-soon p {
+    color: var(--gray);
+    font-size: 18px;
+}
+
+/* Loading text */
+.loading-text {
+    text-align: center;
+    padding: 50px;
+    color: var(--gray);
+}
+
+/* Status messages */
+.status-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 18px 32px;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    z-index: 3000;
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideIn 0.3s;
+    border-left: 5px solid;
+}
+
+.status-success {
+    background: #d1fae5;
+    color: #065f46;
+    border-color: #10b981;
+}
+
+.status-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #ef4444;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .nav {
+        width: 100%;
+        overflow-x: auto;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .avatar-upload {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .profile-stats {
+        justify-content: center;
+    }
+    
+    .clan-actions {
+        flex-direction: column;
+    }
+    
+    .admin-user-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .admin-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
